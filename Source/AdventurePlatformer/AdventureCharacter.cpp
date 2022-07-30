@@ -2,10 +2,13 @@
 
 
 #include "AdventureCharacter.h"
-#include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
-#include "Kismet/KismetMathLibrary.h"
+#include "CoinCollectable.h"
+#include "Components/CapsuleComponent.h"
 #include "GameFramework/MovementComponent.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "Kismet/KismetMathLibrary.h"
+
 
 // Sets default values
 AAdventureCharacter::AAdventureCharacter()
@@ -18,6 +21,8 @@ AAdventureCharacter::AAdventureCharacter()
 
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Follow Camera"));
 	Camera->SetupAttachment(SpringArm);
+
+	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &AAdventureCharacter::BeginOverlap);
 }
 
 // Called when the game starts or when spawned
@@ -55,4 +60,18 @@ void AAdventureCharacter::MoveRight(float val)
 {
 	FRotator direction = Camera->GetComponentRotation();
 	AddMovementInput(UKismetMathLibrary::GetRightVector(direction), val);
+}
+
+void AAdventureCharacter::BeginOverlap
+(UPrimitiveComponent* OverlappedComponent,
+	AActor* OtherActor,
+	UPrimitiveComponent* OtherComp,
+	int32 OtherBodyIndex,
+	bool bFromSweep,
+	const FHitResult& SweepResult)
+{
+	if (OtherActor && (OtherActor != this) && dynamic_cast<ACoinCollectable*>(OtherActor))
+	{
+		coinsCollected++;
+	}
 }
