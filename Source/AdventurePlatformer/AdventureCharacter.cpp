@@ -42,18 +42,17 @@ void AAdventureCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
 	PlayerInputComponent->BindAxis("MoveRight", this, &AAdventureCharacter::MoveRight);
 	PlayerInputComponent->BindAxis("TurnRight", this, &APawn::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
-
+	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Pressed, this, &ACharacter::Jump);
 }
 
 void AAdventureCharacter::MoveForward(float val)
 {
-	FRotator rotation = FRotator(0, 0, GetControlRotation().Yaw);
-	
-	AddMovementInput(GetActorForwardVector(), val);
+	FRotator direction = Camera->GetComponentRotation();
+	AddMovementInput(UKismetMathLibrary::GetForwardVector(direction), val);
 }
 
 void AAdventureCharacter::MoveRight(float val)
 {
-	FRotator rotation = FRotator(0, 0, GetControlRotation().Yaw);
-	AddMovementInput(UKismetMathLibrary::GetRightVector(rotation), val);
+	FRotator direction = Camera->GetComponentRotation();
+	AddMovementInput(UKismetMathLibrary::GetRightVector(direction), val);
 }
