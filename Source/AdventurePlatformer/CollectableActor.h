@@ -18,6 +18,9 @@ private:
 	UPROPERTY(EditAnywhere)
 	class UStaticMeshComponent* Mesh;
 
+	UPROPERTY(EditAnywhere, category = "Rotation")
+	FRotator RotationVelocity = FRotator(0.f, 0.f, 90.f);
+
 public:	
 	// Sets default values for this actor's properties
 	ACollectableActor();
@@ -31,6 +34,6 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION()
-	void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	virtual void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 };

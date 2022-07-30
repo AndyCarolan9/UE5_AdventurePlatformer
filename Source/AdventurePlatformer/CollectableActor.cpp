@@ -2,6 +2,7 @@
 
 
 #include "CollectableActor.h"
+#include "AdventureCharacter.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/StaticMeshComponent.h"
 
@@ -33,13 +34,14 @@ void ACollectableActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	AddActorLocalRotation(RotationVelocity * DeltaTime);
 }
 
 void ACollectableActor::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (OtherActor && (OtherActor != this))
+	if (OtherActor && (OtherActor != this) && dynamic_cast<AAdventureCharacter*>(OtherActor))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Actor: %s"), *OtherActor->GetName());
+		Destroy();
 	}
 }
 
