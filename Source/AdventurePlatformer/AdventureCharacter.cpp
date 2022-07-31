@@ -24,6 +24,8 @@ AAdventureCharacter::AAdventureCharacter()
 	Camera->SetupAttachment(SpringArm);
 
 	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &AAdventureCharacter::BeginOverlap);
+
+	IsAttacking = false;
 }
 
 // Called when the game starts or when spawned
@@ -54,6 +56,7 @@ void AAdventureCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
 	PlayerInputComponent->BindAxis("TurnRight", this, &APawn::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Pressed, this, &ACharacter::Jump);
+	PlayerInputComponent->BindAction("Attack", EInputEvent::IE_Pressed, this, &AAdventureCharacter::Attack);
 }
 
 void AAdventureCharacter::MoveForward(float val)
@@ -66,6 +69,14 @@ void AAdventureCharacter::MoveRight(float val)
 {
 	FRotator direction = Camera->GetComponentRotation();
 	AddMovementInput(UKismetMathLibrary::GetRightVector(direction), val);
+}
+
+void AAdventureCharacter::Attack()
+{
+	if (!IsAttacking && MagicalStaff)
+	{
+		IsAttacking = true;
+	}
 }
 
 void AAdventureCharacter::BeginOverlap

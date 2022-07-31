@@ -26,6 +26,10 @@ private:
 
 	UPROPERTY()
 	class AMagicalStaff* MagicalStaff;
+
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool IsAttacking;
 	
 public:
 	// Sets default values for this character's properties
@@ -54,4 +58,6 @@ public:
 private:
 	void MoveForward(float val);
 	void MoveRight(float val);
+
+	void Attack();
 };
