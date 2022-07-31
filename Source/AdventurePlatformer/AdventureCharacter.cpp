@@ -8,6 +8,7 @@
 #include "GameFramework/MovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "MagicalStaff.h"
 
 
 // Sets default values
@@ -30,6 +31,11 @@ void AAdventureCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	if (MagicalStaffClass)
+	{
+		MagicalStaff = GetWorld()->SpawnActor<AMagicalStaff>(MagicalStaffClass);
+		MagicalStaff->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("StaffSocket"));
+	}
 }
 
 // Called every frame

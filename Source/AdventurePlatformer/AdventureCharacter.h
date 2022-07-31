@@ -20,6 +20,12 @@ private:
 
 	UPROPERTY(VisibleAnywhere, category = "Collectables")
 	int coinsCollected;
+
+	UPROPERTY(EditDefaultsOnly, category = "Magical Staff")
+	TSubclassOf<class AMagicalStaff> MagicalStaffClass;
+
+	UPROPERTY()
+	class AMagicalStaff* MagicalStaff;
 	
 public:
 	// Sets default values for this character's properties
