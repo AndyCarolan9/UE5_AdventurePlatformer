@@ -24,8 +24,6 @@ AAdventureCharacter::AAdventureCharacter()
 	Camera->SetupAttachment(SpringArm);
 
 	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &AAdventureCharacter::BeginOverlap);
-
-	IsAttacking = false;
 }
 
 // Called when the game starts or when spawned
@@ -73,9 +71,9 @@ void AAdventureCharacter::MoveRight(float val)
 
 void AAdventureCharacter::Attack()
 {
-	if (!IsAttacking && MagicalStaff)
+	if (MagicalStaff && Montage)
 	{
-		IsAttacking = true;
+		PlayAnimMontage(Montage);
 	}
 }
 
