@@ -13,17 +13,21 @@ class ADVENTUREPLATFORMER_API AMagicalStaff : public AActor
 
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* Mesh;
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	AMagicalStaff();
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Projectile")
+	FVector ProjectileSpawn;
+
+	UPROPERTY(EditDefaultsOnly, Category = Projectile)
+	TSubclassOf<class AMagicProjectile> ProjectileClass;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
+public:
+	void Shoot(FVector CameraLocation, FRotator CameraRotation);
 };

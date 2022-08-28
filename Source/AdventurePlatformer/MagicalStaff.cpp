@@ -2,6 +2,7 @@
 
 
 #include "MagicalStaff.h"
+#include "MagicProjectile.h"
 
 // Sets default values
 AMagicalStaff::AMagicalStaff()
@@ -20,10 +21,28 @@ void AMagicalStaff::BeginPlay()
 	
 }
 
-// Called every frame
-void AMagicalStaff::Tick(float DeltaTime)
+void AMagicalStaff::Shoot(FVector CameraLocation, FRotator CameraRotation)
 {
-	Super::Tick(DeltaTime);
+	if (ProjectileClass)
+	{
+		ProjectileSpawn.Set(0.0f, 60.0f, 0.0f);
 
+		FVector SpawnLoc = CameraLocation + FTransform(CameraRotation).TransformVector(ProjectileSpawn);
+
+		FRotator SpawnRotation = CameraRotation;
+		SpawnRotation.Pitch += 10.0f;
+
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.Owner = this;
+		SpawnParams.Instigator = GetInstigator();
+
+		AMagicProjectile* Projectile = GetWorld()->SpawnActor<AMagicProjectile>(ProjectileClass, SpawnLoc, SpawnRotation, SpawnParams);
+
+		if (Projectile)
+		{
+			FVector LaunchDirection = SpawnRotation.Vector();
+			Projectile->FireInDirection(LaunchDirection);
+		}
+	}
 }
 

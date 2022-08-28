@@ -65,6 +65,7 @@ void AAdventureCharacter::MoveForward(float val)
 
 void AAdventureCharacter::MoveRight(float val)
 {
+	Direction = val;
 	FRotator direction = Camera->GetComponentRotation();
 	AddMovementInput(UKismetMathLibrary::GetRightVector(direction), val);
 }
@@ -74,6 +75,17 @@ void AAdventureCharacter::Attack()
 	if (MagicalStaff && Montage)
 	{
 		PlayAnimMontage(Montage);
+	}
+}
+
+void AAdventureCharacter::FireProjectile()
+{
+	if (MagicalStaff)
+	{
+		FVector CameraLocation;
+		FRotator CameraRotation;
+		GetActorEyesViewPoint(CameraLocation, CameraRotation);
+		MagicalStaff->Shoot(CameraLocation, CameraRotation);
 	}
 }
 

@@ -30,6 +30,10 @@ private:
 	UPROPERTY(EditAnywhere, category = "Attack")
 	UAnimMontage* Montage;
 	
+protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	float Direction;
+
 public:
 	// Sets default values for this character's properties
 	AAdventureCharacter();
@@ -59,4 +63,7 @@ private:
 	void MoveRight(float val);
 
 	void Attack();
+
+	UFUNCTION(BlueprintCallable, Category = "Player Actions")
+	void FireProjectile();
 };
