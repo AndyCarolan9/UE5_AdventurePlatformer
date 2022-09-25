@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
+#include "BaseCharacter.h"
 #include "AdventureCharacter.generated.h"
 
 UCLASS()
-class ADVENTUREPLATFORMER_API AAdventureCharacter : public ACharacter
+class ADVENTUREPLATFORMER_API AAdventureCharacter : public ABaseCharacter
 {
 	GENERATED_BODY()
 
@@ -26,9 +26,6 @@ private:
 
 	UPROPERTY()
 	class AMagicalStaff* MagicalStaff;
-
-	UPROPERTY(EditAnywhere, category = "Attack")
-	UAnimMontage* Montage;
 	
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
@@ -64,7 +61,7 @@ private:
 	void MoveForward(float val);
 	void MoveRight(float val);
 
-	void Attack();
+	void Attack() override;
 
 	UFUNCTION(BlueprintCallable, Category = "Player Actions")
 	void FireProjectile();
