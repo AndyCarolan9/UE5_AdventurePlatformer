@@ -3,12 +3,32 @@
 
 #include "BaseCharacter.h"
 
+const float ABaseCharacter::MAXHEALTH = 100.0f;
+
 // Sets default values
 ABaseCharacter::ABaseCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	Health = ABaseCharacter::MAXHEALTH;
+}
+
+void ABaseCharacter::ApplyDamage(float damageToApply)
+{
+	if (damageToApply > Health)
+	{
+		Health = 0;
+	}
+	else 
+	{
+		Health -= damageToApply;
+	}
+}
+
+float ABaseCharacter::GetHealth() const
+{
+	return Health;
 }
 
 // Called when the game starts or when spawned

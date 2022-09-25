@@ -11,13 +11,22 @@ class ADVENTUREPLATFORMER_API ABaseCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
+	static const float MAXHEALTH;
+
 protected:
 	UPROPERTY(EditAnywhere, category = "Attack")
 		UAnimMontage* Montage;
 
+	UPROPERTY(VisibleAnywhere, category = "Health")
+		float Health;
+
 public:
 	// Sets default values for this character's properties
 	ABaseCharacter();
+
+	virtual void ApplyDamage(float damageToApply);
+
+	virtual float GetHealth() const;
 
 protected:
 	// Called when the game starts or when spawned
