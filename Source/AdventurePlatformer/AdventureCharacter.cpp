@@ -59,12 +59,17 @@ void AAdventureCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
 
 void AAdventureCharacter::MoveForward(float val)
 {
+	Speed = val;
 	FRotator direction = Camera->GetComponentRotation();
 	AddMovementInput(UKismetMathLibrary::GetForwardVector(direction), val);
 }
 
 void AAdventureCharacter::MoveRight(float val)
 {
+	if (Speed == 0)
+	{
+		Speed = abs(val);
+	}
 	Direction = val;
 	FRotator direction = Camera->GetComponentRotation();
 	AddMovementInput(UKismetMathLibrary::GetRightVector(direction), val);
