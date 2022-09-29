@@ -2,6 +2,7 @@
 
 
 #include "MagicProjectile.h"
+#include "BaseCharacter.h"
 
 // Sets default values
 AMagicProjectile::AMagicProjectile()
@@ -36,6 +37,8 @@ AMagicProjectile::AMagicProjectile()
 
     ProjectileMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ProjectileMeshComponent"));
     ProjectileMeshComponent->SetupAttachment(RootComponent);
+
+    CollisionComponent->OnComponentBeginOverlap.AddDynamic(this, &AMagicProjectile::BeginOverlap);
 }
 
 // Called when the game starts or when spawned
@@ -44,6 +47,16 @@ void AMagicProjectile::BeginPlay()
 	Super::BeginPlay();
 
     SetLifeSpan(3.0f);
+}
+
+void AMagicProjectile::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+    if (ABaseCharacter* const character = Cast<ABaseCharacter>(OtherActor))
+    {
+        character->ApplyDamage(DamageAmount);
+    }
+
+    Destroy();
 }
 
 // Called every frame
