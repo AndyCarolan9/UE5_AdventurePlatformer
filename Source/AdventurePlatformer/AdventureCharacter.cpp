@@ -2,6 +2,7 @@
 
 
 #include "AdventureCharacter.h"
+
 #include "Camera/CameraComponent.h"
 #include "CoinCollectable.h"
 #include "Components/CapsuleComponent.h"
@@ -9,6 +10,8 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "MagicalStaff.h"
+#include "Perception/AIPerceptionStimuliSourceComponent.h"
+#include "Perception/AISense_Sight.h"
 
 
 // Sets default values
@@ -24,6 +27,8 @@ AAdventureCharacter::AAdventureCharacter()
 	Camera->SetupAttachment(SpringArm);
 
 	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &AAdventureCharacter::BeginOverlap);
+
+	SetupStimulus();
 }
 
 // Called when the game starts or when spawned
@@ -92,6 +97,13 @@ void AAdventureCharacter::FireProjectile()
 		GetActorEyesViewPoint(CameraLocation, CameraRotation);
 		MagicalStaff->Shoot(CameraLocation, CameraRotation);
 	}
+}
+
+void AAdventureCharacter::SetupStimulus()
+{
+	stimulus = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>(TEXT("stimulus"));
+	stimulus->RegisterForSense(TSubclassOf<UAISense_Sight>());
+	stimulus->RegisterWithPerceptionSystem();
 }
 
 void AAdventureCharacter::BeginOverlap

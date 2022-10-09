@@ -2,7 +2,9 @@
 
 
 #include "BaseAIController.h"
+
 #include "BaseEnemy.h"
+#include "BehaviorTree/BlackboardComponent.h" 
 #include "Perception/AISenseConfig_Sight.h"
 #include "Perception/AIPerceptionComponent.h"
 
@@ -39,6 +41,21 @@ void ABaseAIController::OnPossess(APawn* const pawn)
 
 void ABaseAIController::OnSenseUpdated(TArray<AActor*> const& updatedActors)
 {
+	for (size_t i = 0; i < updatedActors.Num(); i++)
+	{
+		FActorPerceptionBlueprintInfo info;
+		GetPerceptionComponent()->GetActorsPerception(updatedActors[i], info);
+
+		for (size_t j = 0; j < info.LastSensedStimuli.Num(); j++)
+		{
+			FAIStimulus const stim = info.LastSensedStimuli[j];
+
+			if (blackboardComponent && stim.Type.Name == "Default__AISense_Sight")
+			{
+				blackboardComponent->SetValueAsBool(TEXT("CanSeePlayer"), stim.WasSuccessfullySensed());
+			}
+		}
+	}
 }
 
 void ABaseAIController::SetupPerceptionSystem()

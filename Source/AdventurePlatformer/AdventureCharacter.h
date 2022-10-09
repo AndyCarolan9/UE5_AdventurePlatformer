@@ -26,6 +26,8 @@ private:
 
 	UPROPERTY()
 	class AMagicalStaff* MagicalStaff;
+
+	class UAIPerceptionStimuliSourceComponent* stimulus;
 	
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
@@ -65,4 +67,6 @@ private:
 
 	UFUNCTION(BlueprintCallable, Category = "Player Actions")
 	void FireProjectile();
+
+	void SetupStimulus();
 };
