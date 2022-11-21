@@ -23,4 +23,7 @@ public:
 	ABaseEnemy();
 
 	UBehaviorTree* GetBehaviorTree() const;	
+
+	virtual void AttackStart();
+	virtual void AttackEnd();
 };

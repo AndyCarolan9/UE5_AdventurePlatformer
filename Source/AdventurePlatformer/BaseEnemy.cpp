@@ -12,3 +12,11 @@ UBehaviorTree* ABaseEnemy::GetBehaviorTree() const
 {
 	return behaviorTree;
 }
+
+void ABaseEnemy::AttackStart()
+{
+}
+
+void ABaseEnemy::AttackEnd()
+{
+}

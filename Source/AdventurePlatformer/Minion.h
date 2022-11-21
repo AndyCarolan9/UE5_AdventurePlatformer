@@ -14,4 +14,13 @@ class ADVENTUREPLATFORMER_API AMinion : public ABaseEnemy
 {
 	GENERATED_BODY()
 	
+public:
+	AMinion();
+
+	void AttackStart() override;
+	void AttackEnd() override;
+
+protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Collision")
+	TObjectPtr<class UBoxComponent> RightFistCollision;
 };
