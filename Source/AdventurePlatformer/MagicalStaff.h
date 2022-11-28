@@ -12,7 +12,7 @@ class ADVENTUREPLATFORMER_API AMagicalStaff : public AActor
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* Mesh;
+	TObjectPtr<UStaticMeshComponent> Mesh;
 
 public:
 	// Sets default values for this actor's properties

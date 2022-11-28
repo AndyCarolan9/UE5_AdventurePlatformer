@@ -13,10 +13,10 @@ class ADVENTUREPLATFORMER_API ACollectableActor : public AActor
 	
 private:
 	UPROPERTY(EditAnywhere)
-	class UCapsuleComponent* Capsule;
+	TObjectPtr<class UCapsuleComponent> Capsule;
 
 	UPROPERTY(EditAnywhere)
-	class UStaticMeshComponent* Mesh;
+	TObjectPtr<class UStaticMeshComponent> Mesh;
 
 	UPROPERTY(EditAnywhere, category = "Rotation")
 	FRotator RotationVelocity = FRotator(0.f, 0.f, 90.f);

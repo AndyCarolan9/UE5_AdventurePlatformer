@@ -20,7 +20,7 @@ private:
 	UPROPERTY()
 	UBlackboardComponent* blackboardComponent;
 
-	class UAISenseConfig_Sight* sightConfig;
+	TObjectPtr<class UAISenseConfig_Sight> sightConfig;
 
 	UFUNCTION()
 	virtual void OnSenseUpdated(TArray<AActor*> const& updatedActors);

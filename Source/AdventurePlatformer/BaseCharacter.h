@@ -15,10 +15,10 @@ class ADVENTUREPLATFORMER_API ABaseCharacter : public ACharacter
 
 protected:
 	UPROPERTY(EditAnywhere, category = "Attack")
-		UAnimMontage* Montage;
+	TObjectPtr<UAnimMontage> Montage;
 
 	UPROPERTY(VisibleAnywhere, category = "Health")
-		float Health;
+	float Health;
 
 public:
 	// Sets default values for this character's properties

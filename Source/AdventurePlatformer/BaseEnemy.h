@@ -17,7 +17,7 @@ class ADVENTUREPLATFORMER_API ABaseEnemy : public ABaseCharacter
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI", meta = (AllowPrivateAccess = "true"))
-	UBehaviorTree* behaviorTree;
+	TObjectPtr<UBehaviorTree> behaviorTree;
 
 public:
 	ABaseEnemy();

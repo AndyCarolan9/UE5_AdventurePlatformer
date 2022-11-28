@@ -13,10 +13,10 @@ class ADVENTUREPLATFORMER_API AAdventureCharacter : public ABaseCharacter
 
 private:
 	UPROPERTY(EditAnywhere)
-	class USpringArmComponent* SpringArm;
+	TObjectPtr<class USpringArmComponent> SpringArm;
 
 	UPROPERTY(EditAnywhere)
-	class UCameraComponent* Camera;
+	TObjectPtr<class UCameraComponent> Camera;
 
 	UPROPERTY(VisibleAnywhere, category = "Collectables")
 	int coinsCollected;
@@ -25,9 +25,9 @@ private:
 	TSubclassOf<class AMagicalStaff> MagicalStaffClass;
 
 	UPROPERTY()
-	class AMagicalStaff* MagicalStaff;
+	TObjectPtr<class AMagicalStaff> MagicalStaff;
 
-	class UAIPerceptionStimuliSourceComponent* stimulus;
+	TObjectPtr<class UAIPerceptionStimuliSourceComponent> stimulus;
 	
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
