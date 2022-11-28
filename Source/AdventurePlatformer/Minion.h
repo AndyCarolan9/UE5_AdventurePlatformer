@@ -20,6 +20,8 @@ public:
 	void AttackStart() override;
 	void AttackEnd() override;
 
+	void MeleeAttack() override;
+
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Collision")
 	TObjectPtr<class UBoxComponent> RightFistCollision;

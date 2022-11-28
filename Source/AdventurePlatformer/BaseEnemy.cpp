@@ -20,3 +20,11 @@ void ABaseEnemy::AttackStart()
 void ABaseEnemy::AttackEnd()
 {
 }
+
+void ABaseEnemy::MeleeAttack()
+{
+	if (Montage)
+	{
+		PlayAnimMontage(Montage);
+	}
+}
