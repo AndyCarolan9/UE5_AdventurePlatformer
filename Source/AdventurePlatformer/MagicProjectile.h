@@ -21,6 +21,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category = Damage)
 	float DamageAmount = 10.0f;
 
+	UPROPERTY(EditAnywhere, Category = Damage)
+	TSubclassOf<class UDamageType> DamageType;
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 

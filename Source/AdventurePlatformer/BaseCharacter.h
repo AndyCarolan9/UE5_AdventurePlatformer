@@ -17,6 +17,9 @@ protected:
 	UPROPERTY(EditAnywhere, category = "Attack")
 	TObjectPtr<UAnimMontage> Montage;
 
+	UPROPERTY(VisibleAnywhere, Category = "Components");
+	TObjectPtr<class UHealthComponent> HealthComponent;
+
 	UPROPERTY(VisibleAnywhere, category = "Health")
 	float Health;
 
@@ -24,18 +27,14 @@ public:
 	// Sets default values for this character's properties
 	ABaseCharacter();
 
-	virtual void ApplyDamage(float damageToApply);
-
-	virtual float GetHealth() const;
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UFUNCTION()
+	virtual void OnHealthChanged(class UHealthComponent* HealthComp, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
 
+public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 

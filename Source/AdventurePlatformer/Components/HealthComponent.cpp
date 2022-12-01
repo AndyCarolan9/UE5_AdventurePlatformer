@@ -13,6 +13,11 @@ float UHealthComponent::GetHealth() const
 	return Health;
 }
 
+bool UHealthComponent::IsDead() const
+{
+	return bIsDead;
+}
+
 
 // Called when the game starts
 void UHealthComponent::BeginPlay()
@@ -31,12 +36,16 @@ void UHealthComponent::BeginPlay()
 
 void UHealthComponent::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
-	if (Damage <= 0 || Health <= 0)
+	if (Damage <= 0 || bIsDead)
 	{
 		return;
 	}
 
 	Health = FMath::Clamp(Health - Damage, 0.0f, DefaultHealth);
+
+	UE_LOG(LogTemp, Warning, TEXT("Health: %s"), *FString::SanitizeFloat(Health));
+
+	bIsDead = Health <= 0;
 
 	OnHealthChanged.Broadcast(this, DamageType, InstigatedBy, DamageCauser);
 }

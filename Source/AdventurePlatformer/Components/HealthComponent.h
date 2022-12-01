@@ -20,11 +20,15 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 	float DefaultHealth;
 
+	bool bIsDead;
+
 public:	
 	// Sets default values for this component's properties
 	UHealthComponent();
 
 	float GetHealth() const;
+
+	bool IsDead() const;
 
 	UPROPERTY(BlueprintAssignable, Category = "Events")
 	FOnHealthChanged OnHealthChanged;

@@ -3,32 +3,14 @@
 
 #include "BaseCharacter.h"
 
-const float ABaseCharacter::MAXHEALTH = 100.0f;
+#include "Components/CapsuleComponent.h"
+#include "Components/HealthComponent.h"
+#include "GameFramework/PawnMovementComponent.h"
 
 // Sets default values
 ABaseCharacter::ABaseCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-
-	Health = ABaseCharacter::MAXHEALTH;
-}
-
-void ABaseCharacter::ApplyDamage(float damageToApply)
-{
-	if (damageToApply > Health)
-	{
-		Health = 0;
-	}
-	else 
-	{
-		Health -= damageToApply;
-	}
-}
-
-float ABaseCharacter::GetHealth() const
-{
-	return Health;
+	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("Health Comp"));
 }
 
 // Called when the game starts or when spawned
@@ -36,13 +18,22 @@ void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	if (HealthComponent)
+	{
+		HealthComponent->OnHealthChanged.AddDynamic(this, &ABaseCharacter::OnHealthChanged);
+	}
 }
 
-// Called every frame
-void ABaseCharacter::Tick(float DeltaTime)
+void ABaseCharacter::OnHealthChanged(UHealthComponent* HealthComp, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
-	Super::Tick(DeltaTime);
+	if (Health <= 0 && !HealthComponent->IsDead())
+	{
+		GetMovementComponent()->StopMovementImmediately();
+		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
+		DetachFromControllerPendingDestroy();
+		SetLifeSpan(5.0f);
+	}
 }
 
 // Called to bind functionality to input

@@ -4,6 +4,8 @@
 #include "MagicProjectile.h"
 #include "BaseCharacter.h"
 
+#include "Kismet/GameplayStatics.h"
+
 // Sets default values
 AMagicProjectile::AMagicProjectile()
 {
@@ -51,9 +53,13 @@ void AMagicProjectile::BeginPlay()
 
 void AMagicProjectile::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-    if (ABaseCharacter* const character = Cast<ABaseCharacter>(OtherActor))
+    if (GetOwner())
     {
-        character->ApplyDamage(DamageAmount);
+        if (ABaseCharacter* const character = Cast<ABaseCharacter>(OtherActor))
+        {
+            UGameplayStatics::ApplyDamage(character, DamageAmount, GetOwner()->GetInstigatorController(), this, DamageType);
+        }
+
     }
 
     Destroy();
