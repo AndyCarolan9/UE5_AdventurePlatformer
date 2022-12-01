@@ -21,7 +21,7 @@ void ABaseEnemy::AttackEnd()
 {
 }
 
-void ABaseEnemy::MeleeAttack()
+void ABaseEnemy::Attack()
 {
 	if (Montage)
 	{

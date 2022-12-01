@@ -37,11 +37,3 @@ void AMinion::AttackEnd()
 		RightFistCollision->SetNotifyRigidBodyCollision(false);
 	}
 }
-
-void AMinion::MeleeAttack()
-{
-	if (Montage)
-	{
-		PlayAnimMontage(Montage);
-	}
-}

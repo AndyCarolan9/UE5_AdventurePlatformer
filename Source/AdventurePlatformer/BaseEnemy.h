@@ -26,5 +26,5 @@ public:
 
 	virtual void AttackStart();
 	virtual void AttackEnd();
-	virtual void MeleeAttack();
+	void Attack() override;
 };
