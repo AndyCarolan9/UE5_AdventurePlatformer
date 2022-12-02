@@ -20,13 +20,6 @@ private:
 	UPROPERTY()
 	UBlackboardComponent* blackboardComponent;
 
-	TObjectPtr<class UAISenseConfig_Sight> sightConfig;
-
-	UFUNCTION()
-	virtual void OnSenseUpdated(TArray<AActor*> const& updatedActors);
-
-	virtual void SetupPerceptionSystem();
-
 public:
 	ABaseAIController(FObjectInitializer const& objectInitializer);
 
