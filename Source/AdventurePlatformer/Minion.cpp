@@ -3,6 +3,8 @@
 
 #include "Minion.h"
 #include "Components/BoxComponent.h"
+#include "AdventureCharacter.h"
+#include "Kismet/GameplayStatics.h"
 
 AMinion::AMinion()
 {
@@ -18,6 +20,8 @@ AMinion::AMinion()
 
 	RightFistCollision->AttachToComponent(GetMesh(), rules, "RightHandSocket");
 	RightFistCollision->SetRelativeLocation(FVector(0, 0, 0));
+
+	RightFistCollision->OnComponentBeginOverlap.AddDynamic(this, &AMinion::BeginOverlap);
 }
 
 void AMinion::AttackStart()
@@ -35,5 +39,13 @@ void AMinion::AttackEnd()
 	{
 		RightFistCollision->SetCollisionProfileName("NoCollision");
 		RightFistCollision->SetNotifyRigidBodyCollision(false);
+	}
+}
+
+void AMinion::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (AAdventureCharacter* player = Cast<AAdventureCharacter>(OtherActor))
+	{
+		UGameplayStatics::ApplyDamage(player, DamageAmount, GetOwner()->GetInstigatorController(), this, DamageType);
 	}
 }
