@@ -64,27 +64,26 @@ void AAdventureCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
 
 void AAdventureCharacter::MoveForward(float val)
 {
-	Speed = val;
 	FRotator direction = Camera->GetComponentRotation();
 	AddMovementInput(UKismetMathLibrary::GetForwardVector(direction), val);
 }
 
 void AAdventureCharacter::MoveRight(float val)
 {
-	if (Speed == 0)
-	{
-		Speed = abs(val);
-	}
-	Direction = val;
 	FRotator direction = Camera->GetComponentRotation();
 	AddMovementInput(UKismetMathLibrary::GetRightVector(direction), val);
 }
 
 void AAdventureCharacter::Attack()
 {
-	if (MagicalStaff && Montage)
+	FAttackAction* LightAttack = Attacks.FindByPredicate([](FAttackAction inA)
 	{
-		PlayAnimMontage(Montage);
+		return inA.Type == EAttackType::Light;
+	});
+
+	if (MagicalStaff && LightAttack)
+	{
+		PlayAnimMontage(LightAttack->Montage);
 	}
 }
 

@@ -29,12 +29,6 @@ private:
 
 	TObjectPtr<class UAIPerceptionStimuliSourceComponent> stimulus;
 	
-protected:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	float Direction;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	float Speed;
 public:
 	// Sets default values for this character's properties
 	AAdventureCharacter();

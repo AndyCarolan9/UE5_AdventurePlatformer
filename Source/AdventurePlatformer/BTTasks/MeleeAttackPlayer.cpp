@@ -33,5 +33,5 @@ EBTNodeResult::Type UMeleeAttackPlayer::ExecuteTask(UBehaviorTreeComponent& owne
 
 bool UMeleeAttackPlayer::IsMontageFinished(ABaseCharacter* const enemy)
 {
-	return enemy->GetMesh()->GetAnimInstance()->Montage_GetIsStopped(enemy->GetMontage());
+	return enemy->GetCurrentMontage() == nullptr;
 }

@@ -44,8 +44,13 @@ void AMinion::AttackEnd()
 
 void AMinion::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	FAttackAction* LightAttack = Attacks.FindByPredicate([](FAttackAction inA)
+	{
+		return inA.Type == EAttackType::Light;
+	});
+
 	if (AAdventureCharacter* player = Cast<AAdventureCharacter>(OtherActor))
 	{
-		UGameplayStatics::ApplyDamage(player, DamageAmount, GetOwner()->GetInstigatorController(), this, DamageType);
+		UGameplayStatics::ApplyDamage(player, LightAttack->Damage, GetOwner()->GetInstigatorController(), this, LightAttack->DamageType);
 	}
 }

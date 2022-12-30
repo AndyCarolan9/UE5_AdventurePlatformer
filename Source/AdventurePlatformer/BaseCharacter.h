@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Attacks/AttackType.h"
 #include "BaseCharacter.generated.h"
 
 UCLASS()
@@ -15,7 +16,7 @@ class ADVENTUREPLATFORMER_API ABaseCharacter : public ACharacter
 
 protected:
 	UPROPERTY(EditAnywhere, category = "Attack")
-	TObjectPtr<UAnimMontage> Montage;
+	TArray<FAttackAction> Attacks;
 
 	UPROPERTY(VisibleAnywhere, Category = "Components");
 	TObjectPtr<class UHealthComponent> HealthComponent;
@@ -37,8 +38,6 @@ protected:
 public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	UAnimMontage* GetMontage() const;
 
 private:
 	virtual void Attack();

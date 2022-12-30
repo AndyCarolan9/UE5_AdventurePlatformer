@@ -23,8 +23,13 @@ void ABaseEnemy::AttackEnd()
 
 void ABaseEnemy::Attack()
 {
-	if (Montage)
+	FAttackAction* LightAttack = Attacks.FindByPredicate([](FAttackAction inA)
 	{
-		PlayAnimMontage(Montage);
+		return inA.Type == EAttackType::Light;
+	});
+
+	if (LightAttack)
+	{
+		PlayAnimMontage(LightAttack->Montage);
 	}
 }

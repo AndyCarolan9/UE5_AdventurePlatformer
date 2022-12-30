@@ -43,11 +43,6 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 }
 
-UAnimMontage* ABaseCharacter::GetMontage() const
-{
-	return Montage;
-}
-
 void ABaseCharacter::Attack()
 {
 }
