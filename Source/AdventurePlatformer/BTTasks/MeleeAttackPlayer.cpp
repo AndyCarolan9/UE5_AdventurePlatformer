@@ -23,7 +23,7 @@ EBTNodeResult::Type UMeleeAttackPlayer::ExecuteTask(UBehaviorTreeComponent& owne
 	{
 		if (IsMontageFinished(Enemy))
 		{
-			Enemy->Attack();
+			Enemy->LightAttack();
 		}
 	}
 	

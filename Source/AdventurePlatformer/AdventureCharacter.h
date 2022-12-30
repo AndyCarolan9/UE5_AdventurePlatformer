@@ -57,7 +57,7 @@ private:
 	void MoveForward(float val);
 	void MoveRight(float val);
 
-	void Attack() override;
+	void LightAttack() override;
 
 	UFUNCTION(BlueprintCallable, Category = "Player Actions")
 	void FireProjectile();

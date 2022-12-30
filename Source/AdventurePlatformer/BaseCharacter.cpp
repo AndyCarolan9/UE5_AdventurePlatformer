@@ -43,7 +43,17 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 }
 
-void ABaseCharacter::Attack()
+void ABaseCharacter::LightAttack()
 {
+}
+
+void ABaseCharacter::RangedAttack()
+{
+
+}
+
+void ABaseCharacter::HeavyAttack()
+{
+
 }
 

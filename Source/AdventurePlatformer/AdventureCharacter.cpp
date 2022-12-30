@@ -59,7 +59,7 @@ void AAdventureCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
 	PlayerInputComponent->BindAxis("TurnRight", this, &APawn::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Pressed, this, &ACharacter::Jump);
-	PlayerInputComponent->BindAction("Attack", EInputEvent::IE_Pressed, this, &AAdventureCharacter::Attack);
+	PlayerInputComponent->BindAction("Attack", EInputEvent::IE_Pressed, this, &AAdventureCharacter::LightAttack);
 }
 
 void AAdventureCharacter::MoveForward(float val)
@@ -74,7 +74,7 @@ void AAdventureCharacter::MoveRight(float val)
 	AddMovementInput(UKismetMathLibrary::GetRightVector(direction), val);
 }
 
-void AAdventureCharacter::Attack()
+void AAdventureCharacter::LightAttack()
 {
 	FAttackAction* LightAttack = Attacks.FindByPredicate([](FAttackAction inA)
 	{

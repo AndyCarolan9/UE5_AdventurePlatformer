@@ -40,5 +40,7 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 private:
-	virtual void Attack();
+	virtual void LightAttack();
+	virtual void RangedAttack();
+	virtual void HeavyAttack();
 };

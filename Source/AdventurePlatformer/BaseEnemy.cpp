@@ -21,7 +21,7 @@ void ABaseEnemy::AttackEnd()
 {
 }
 
-void ABaseEnemy::Attack()
+void ABaseEnemy::LightAttack()
 {
 	FAttackAction* LightAttack = Attacks.FindByPredicate([](FAttackAction inA)
 	{

@@ -26,5 +26,5 @@ public:
 
 	virtual void AttackStart();
 	virtual void AttackEnd();
-	void Attack() override;
+	void LightAttack() override;
 };
