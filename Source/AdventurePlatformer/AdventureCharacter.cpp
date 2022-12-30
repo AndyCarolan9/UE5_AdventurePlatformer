@@ -59,7 +59,9 @@ void AAdventureCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
 	PlayerInputComponent->BindAxis("TurnRight", this, &APawn::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Pressed, this, &ACharacter::Jump);
-	PlayerInputComponent->BindAction("Attack", EInputEvent::IE_Pressed, this, &AAdventureCharacter::LightAttack);
+	PlayerInputComponent->BindAction("LightAttack", EInputEvent::IE_Pressed, this, &AAdventureCharacter::LightAttack);
+	PlayerInputComponent->BindAction("RangedAttack", EInputEvent::IE_Pressed, this, &AAdventureCharacter::RangedAttack);
+	PlayerInputComponent->BindAction("HeavyAttack", EInputEvent::IE_Pressed, this, &AAdventureCharacter::HeavyAttack);
 }
 
 void AAdventureCharacter::MoveForward(float val)
@@ -76,15 +78,25 @@ void AAdventureCharacter::MoveRight(float val)
 
 void AAdventureCharacter::LightAttack()
 {
+	
+}
+
+void AAdventureCharacter::RangedAttack()
+{
 	FAttackAction* LightAttack = Attacks.FindByPredicate([](FAttackAction inA)
 	{
-		return inA.Type == EAttackType::Light;
+		return inA.Type == EAttackType::Ranged;
 	});
 
 	if (MagicalStaff && LightAttack)
 	{
 		PlayAnimMontage(LightAttack->Montage);
 	}
+}
+
+void AAdventureCharacter::HeavyAttack()
+{
+
 }
 
 void AAdventureCharacter::FireProjectile()
