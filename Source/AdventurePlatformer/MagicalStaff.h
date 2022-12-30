@@ -18,9 +18,6 @@ public:
 	// Sets default values for this actor's properties
 	AMagicalStaff();
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Projectile")
-	FVector ProjectileSpawn;
-
 	UPROPERTY(EditDefaultsOnly, Category = Projectile)
 	TSubclassOf<class AMagicProjectile> ProjectileClass;
 
@@ -29,5 +26,5 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	void Shoot(FVector CameraLocation, FRotator CameraRotation);
+	void Shoot(FRotator CameraRotation);
 };

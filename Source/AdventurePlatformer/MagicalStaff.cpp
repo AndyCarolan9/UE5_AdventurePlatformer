@@ -21,16 +21,13 @@ void AMagicalStaff::BeginPlay()
 	
 }
 
-void AMagicalStaff::Shoot(FVector CameraLocation, FRotator CameraRotation)
+void AMagicalStaff::Shoot(FRotator CameraRotation)
 {
 	if (ProjectileClass)
 	{
-		ProjectileSpawn.Set(0.0f, 60.0f, 0.0f);
-
-		FVector SpawnLoc = CameraLocation + FTransform(CameraRotation).TransformVector(ProjectileSpawn);
+		FVector SpawnLoc = Mesh->GetSocketLocation(TEXT("Spawn Point"));
 
 		FRotator SpawnRotation = CameraRotation;
-		SpawnRotation.Pitch += 10.0f;
 
 		FActorSpawnParameters SpawnParams;
 		SpawnParams.Owner = this;

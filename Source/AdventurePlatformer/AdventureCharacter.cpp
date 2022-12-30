@@ -103,10 +103,7 @@ void AAdventureCharacter::FireProjectile()
 {
 	if (MagicalStaff)
 	{
-		FVector CameraLocation;
-		FRotator CameraRotation;
-		GetActorEyesViewPoint(CameraLocation, CameraRotation);
-		MagicalStaff->Shoot(CameraLocation, CameraRotation);
+		MagicalStaff->Shoot(GetActorRotation());
 	}
 }
 
