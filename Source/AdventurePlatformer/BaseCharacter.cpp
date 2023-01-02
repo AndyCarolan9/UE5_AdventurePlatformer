@@ -26,7 +26,7 @@ void ABaseCharacter::BeginPlay()
 
 void ABaseCharacter::OnHealthChanged(UHealthComponent* HealthComp, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
-	if (Health <= 0 && !HealthComponent->IsDead())
+	if (HealthComponent->IsDead())
 	{
 		GetMovementComponent()->StopMovementImmediately();
 		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);

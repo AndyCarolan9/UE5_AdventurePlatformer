@@ -21,9 +21,6 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Components");
 	TObjectPtr<class UHealthComponent> HealthComponent;
 
-	UPROPERTY(VisibleAnywhere, category = "Health")
-	float Health;
-
 public:
 	// Sets default values for this character's properties
 	ABaseCharacter();
