@@ -9,7 +9,7 @@ void UAttackNotifyState::NotifyBegin(USkeletalMeshComponent* const mesh, UAnimSe
 {
 	if (mesh && mesh->GetOwner())
 	{
-		if (ABaseEnemy* const enemy = Cast<ABaseEnemy>(mesh->GetOwner()))
+		if (ABaseCharacter* const enemy = Cast<ABaseCharacter>(mesh->GetOwner()))
 		{
 			enemy->AttackStart();
 		}
@@ -20,7 +20,7 @@ void UAttackNotifyState::NotifyEnd(USkeletalMeshComponent* const mesh, UAnimSequ
 {
 	if (mesh && mesh->GetOwner())
 	{
-		if (ABaseEnemy* const enemy = Cast<ABaseEnemy>(mesh->GetOwner()))
+		if (ABaseCharacter* const enemy = Cast<ABaseCharacter>(mesh->GetOwner()))
 		{
 			enemy->AttackEnd();
 		}

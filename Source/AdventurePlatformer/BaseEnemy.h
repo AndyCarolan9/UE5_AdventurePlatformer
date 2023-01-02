@@ -24,7 +24,5 @@ public:
 
 	UBehaviorTree* GetBehaviorTree() const;	
 
-	virtual void AttackStart();
-	virtual void AttackEnd();
 	void LightAttack() override;
 };

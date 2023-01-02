@@ -43,6 +43,14 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 }
 
+void ABaseCharacter::AttackStart()
+{
+}
+
+void ABaseCharacter::AttackEnd()
+{
+}
+
 void ABaseCharacter::LightAttack()
 {
 }

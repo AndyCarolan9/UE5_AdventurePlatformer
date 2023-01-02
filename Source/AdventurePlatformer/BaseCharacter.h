@@ -39,6 +39,9 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	virtual void AttackStart();
+	virtual void AttackEnd();
+
 private:
 	virtual void LightAttack();
 	virtual void RangedAttack();

@@ -16,24 +16,24 @@ void ABaseAIController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (auto const Enemy = Cast<ABaseEnemy>(GetPawn()))
+	/*if (auto const Enemy = Cast<ABaseEnemy>(GetPawn()))
 	{
 		if (auto const tree = Enemy->GetBehaviorTree())
 		{
 			UseBlackboard(tree->BlackboardAsset, blackboardComponent);
 		}
-	}
+	}*/
 }
 
 void ABaseAIController::OnPossess(APawn* const pawn)
 {
 	Super::OnPossess(pawn);
 
-	if (auto const Enemy = Cast<ABaseEnemy>(pawn))
-	{
-		if (auto const tree = Enemy->GetBehaviorTree())
-		{
-			RunBehaviorTree(tree);
-		}
-	}
+	//if (auto const Enemy = Cast<ABaseEnemy>(pawn))
+	//{
+	//	if (auto const tree = Enemy->GetBehaviorTree())
+	//	{
+	//		RunBehaviorTree(tree);
+	//	}
+	//}
 }

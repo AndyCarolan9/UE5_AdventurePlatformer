@@ -13,14 +13,6 @@ UBehaviorTree* ABaseEnemy::GetBehaviorTree() const
 	return behaviorTree;
 }
 
-void ABaseEnemy::AttackStart()
-{
-}
-
-void ABaseEnemy::AttackEnd()
-{
-}
-
 void ABaseEnemy::LightAttack()
 {
 	FAttackAction* LightAttack = Attacks.FindByPredicate([](FAttackAction inA)

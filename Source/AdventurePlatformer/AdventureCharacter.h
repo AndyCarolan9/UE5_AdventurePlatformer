@@ -53,6 +53,9 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void AttackStart() override;
+	void AttackEnd() override;
+
 private:
 	void MoveForward(float val);
 	void MoveRight(float val);
@@ -60,6 +63,8 @@ private:
 	void LightAttack() override;
 	void RangedAttack() override;
 	void HeavyAttack() override;
+
+	FAttackAction* PlayAttack(EAttackType type);
 
 	UFUNCTION(BlueprintCallable, Category = "Player Actions")
 	void FireProjectile();

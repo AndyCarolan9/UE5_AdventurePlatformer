@@ -40,6 +40,7 @@ void AAdventureCharacter::BeginPlay()
 	{
 		MagicalStaff = GetWorld()->SpawnActor<AMagicalStaff>(MagicalStaffClass);
 		MagicalStaff->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, TEXT("StaffSocket"));
+		MagicalStaff->SetOwnerCharacter(this);
 	}
 }
 
@@ -64,6 +65,22 @@ void AAdventureCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
 	PlayerInputComponent->BindAction("HeavyAttack", EInputEvent::IE_Pressed, this, &AAdventureCharacter::HeavyAttack);
 }
 
+void AAdventureCharacter::AttackStart()
+{
+	if (MagicalStaff)
+	{
+		MagicalStaff->SetCollisionActive(true);
+	}
+}
+
+void AAdventureCharacter::AttackEnd()
+{
+	if (MagicalStaff)
+	{
+		MagicalStaff->SetCollisionActive(false);
+	}
+}
+
 void AAdventureCharacter::MoveForward(float val)
 {
 	FRotator direction = Camera->GetComponentRotation();
@@ -78,25 +95,38 @@ void AAdventureCharacter::MoveRight(float val)
 
 void AAdventureCharacter::LightAttack()
 {
-	
+	FAttackAction* action = PlayAttack(EAttackType::Light);
+
+	if (action)
+	{
+		MagicalStaff->SetDamageType(action->DamageType);
+		MagicalStaff->SetMeleeDamage(action->Damage);
+	}
 }
 
 void AAdventureCharacter::RangedAttack()
 {
-	FAttackAction* LightAttack = Attacks.FindByPredicate([](FAttackAction inA)
-	{
-		return inA.Type == EAttackType::Ranged;
-	});
-
-	if (MagicalStaff && LightAttack)
-	{
-		PlayAnimMontage(LightAttack->Montage);
-	}
+	PlayAttack(EAttackType::Ranged);
 }
 
 void AAdventureCharacter::HeavyAttack()
 {
 
+}
+
+FAttackAction* AAdventureCharacter::PlayAttack(EAttackType type)
+{
+	FAttackAction* Attack = Attacks.FindByPredicate([type](FAttackAction inA)
+	{
+		return inA.Type == type;
+	});
+
+	if (MagicalStaff && Attack)
+	{
+		PlayAnimMontage(Attack->Montage);
+	}
+
+	return Attack;
 }
 
 void AAdventureCharacter::FireProjectile()
