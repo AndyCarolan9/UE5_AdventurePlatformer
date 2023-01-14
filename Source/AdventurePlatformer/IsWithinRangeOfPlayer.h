@@ -17,7 +17,7 @@ class ADVENTUREPLATFORMER_API UIsWithinRangeOfPlayer : public UBTService_Blackbo
 public:
 	UIsWithinRangeOfPlayer();
 
-	void OnBecomeRelevant(UBehaviorTreeComponent& ownerComp, uint8* nodeMemory) override;
+	void TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AI, meta = (AllowPrivateAccess = "true"))
